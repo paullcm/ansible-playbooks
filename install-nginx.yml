@@ -2,7 +2,11 @@
 #About: This will install Nginx
 #
 ---
-- hosts: '{{inventory}}'
+- hosts: 'nginx'
   become: yes
+#  tasks:
+#  - name: print all vars
+#    debug: var=vars
   roles:
   - nginx
+
