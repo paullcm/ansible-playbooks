@@ -1,0 +1,23 @@
+- hosts: vsftpd
+  gather_facts: yes
+  become: yes
+  roles: 
+      - role: vsftpd
+        vars:
+          vsftpd_enable_virt_users: true
+          vsftpd_virt_users:
+            - username: ftp
+              password: ftp
+              guest_username: centos
+              local_root: /var/ftp/
+              write_enable: yes
+            - username: test
+              password: test
+              guest_username: centos
+              local_root: /var/ftp
+              write_enable: yes
+            - username: ftptest
+              password: ftptest
+              guest_username: centos
+              local_root: /var/ftp
+              write_enable: yes

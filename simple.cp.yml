@@ -1,0 +1,16 @@
+- hosts: remote
+  become: yes
+
+  tasks:
+  - name: Get PID
+    shell: "ps -ef | grep {{process}} | grep -v ansible | grep -v grep | awk '{print $2}'"
+    register: pid
+
+  - name: Copy
+    copy: src=/disk/1/mdnTest_1_1.txt.tar.gz dest=/disk/workspace/ansible-playbooks/
+
+  - name: untar
+    unarchive: src=/disk/workspace/ansible-playbooks/mdnTest_1_1.txt.tar.gz dest=/disk/workspace/ansible-playbooks/
+    
+  - debug: var=pid.stdout
+

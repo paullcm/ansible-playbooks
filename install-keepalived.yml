@@ -1,0 +1,10 @@
+- hosts: keepalived_master
+  roles:
+    - role: keepalived
+      keepalived_role: master
+
+- hosts: keepalived_backup
+  roles:
+  - role: keepalived
+    keepalived_role: backup
+
