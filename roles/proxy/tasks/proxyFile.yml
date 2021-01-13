@@ -1,0 +1,83 @@
+---
+# - name: copy DbaseIds.mmsSpInfo to monconf
+#   copy:
+#     src: "/opt/proxy/monconf/DbaseIds.mmsSpInfo"
+#     dest: /opt/proxy/monconf
+
+# - name: copy DbaseIds.product to monconf
+#   copy:
+#     src: "/opt/proxy/monconf/DbaseIds.product"
+#     dest: /opt/proxy/monconf
+
+# - name: copy DbaseIds.service to monconf
+#   copy:
+#     src: "/opt/proxy/monconf/DbaseIds.service"
+#     dest: /opt/proxy/monconf
+
+# - name: copy Properties.httpAgent to monconf
+#   copy:
+#     src: "/opt/proxy/monconf/Properties.httpAgent"
+#     dest: /opt/proxy/monconf
+
+- name: copy mmspxapi jar to custo
+  copy:
+    src: "/disk/workspace/ASBPF8571/MMSProxyletAPI/lib/mmspxapi.jar"
+    dest: /opt/proxy/custo
+
+- name: copy http-api jar to custo
+  copy:
+    src: "/disk/workspace/ASBPF8571/HttpAPI/lib/http-api.jar"
+    dest: /opt/proxy/custo
+
+- name: copy mmsapi jar to custo
+  copy:
+    src: "/disk/workspace/ASBPF8571/MMSAPI/lib/mmsapi.jar"
+    dest: /opt/proxy/custo
+
+- name: copy mmsserver jar to custo
+  copy:
+    src: "/disk/workspace/ASBPF8571/MMSCServer/lib/mmsserver.jar"
+    dest: /opt/proxy/custo
+
+- name: copy mmscodec jar to custo
+  copy:
+    src: "/disk/workspace/ASBPF8571/MMSCodecProxylet/lib/mmscodec.jar"
+    dest: /opt/proxy/custo
+
+- name: copy mmsrelay jar to custo
+  copy:
+    src: "/disk/workspace/ASBPF8571/MMSRelayProxylet/lib/mmsrelay.jar"
+    dest: /opt/proxy/custo
+
+- name: copy ctmmscde jar to custo
+  copy:
+    src: "/disk/workspace/ASBPF8571/CTMMSCDE/lib/ctmmscde.jar"
+    dest: /opt/proxy/custo
+
+
+- name: copy HttpAgent jar to custo
+  copy:
+    src: "/disk/workspace/ASBPF8571/HttpAgent/lib/httpagent.jar"
+    dest: /opt/proxy/custo
+
+# - name: copy ntp rpm
+#   copy:
+#     src: "{{ playbook_dir }}/file/ntpdate-4.2.6p5-15.el6.centos.x86_64.rpm"
+#     dest: /opt
+#     owner: root
+#     group: root
+#     mode: 0755
+#     backup: no
+#   become: true
+#   become_user: root
+#   become_method: sudo
+
+# - name: install ntp rpm
+#   yum:
+#     name: /opt/ntpdate-4.2.6p5-15.el6.centos.x86_64.rpm
+#     state: present
+
+# - name: remove nptdate
+#   file:
+#     path: /opt/ntpdate-4.2.6p5-15.el6.centos.x86_64.rpm
+#     state: absent

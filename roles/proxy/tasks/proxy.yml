@@ -1,0 +1,116 @@
+---
+# - name: Change HttpStack name in conf
+#   lineinfile:
+#       dest: "{{ installDir }}/monconf/Application.httpStack"
+#       regexp: ^COMMAND     bin/http_stack
+#       line: COMMAND bin/{{ stackName }}
+#       state: present
+#
+# - name: Change HttpStack name in bin
+#   shell: mv {{ installDir }}/bin/http_stack  {{installDir}}/bin/{{ stackName }}
+#   ignore_errors: yes
+
+# - name: add hosts proxy name
+#   lineinfile:
+#     dest: "/etc/hosts"
+#     regexp: cm-mmsc-xieliangjun-2
+#     line:  "{{ ansible_host }} cm-mmsc-xieliangjun-2"
+#     state: present
+# - name: change dbCache.properties ip
+#   lineinfile:
+#     dest: "/opt/proxy/resource/dbCache.properties"
+#     regexp: dbCache.host
+#     line:  "dbCache.host={{ ansible_host }}"
+#     state: present
+
+
+# change back to noraml name
+# - name: Change proxy name in opt
+#   shell: rm  {{installDir}};mv   /opt/{{ stackName }}   {{installDir}}
+#   become: true
+#   become_user: root
+#   become_method: sudo
+#   ignore_errors: yes
+#
+# - name: Change HttpStack name in conf
+#   lineinfile:
+#     dest: "{{ installDir }}/monconf/Application.httpStack"
+#     regexp: ^COMMAND bin/{{ stackName }}
+#     line:  COMMAND     bin/http_stack
+#     state: present
+#
+# - name: Change HttpStack name in bin
+#   shell: mv   {{installDir}}/bin/{{ stackName }} {{ installDir }}/bin/http_stack
+
+
+#  - name: Change HttpStack hs_5gmc_3128 port
+#    shell: "source ~/.bash_profile;{{installDir}}/scripts/admin/systemAdmin.sh updateInstanceProperty hs_5gmc_3128 proxyHttpAddress '0.0.0.0:{{ rcsStackPort }}'"
+#    ignore_errors: yes
+#  - name: Change HttpStack hs_ue_8080 port
+#    shell: "source ~/.bash_profile;{{installDir}}/scripts/admin/systemAdmin.sh updateInstanceProperty hs_ue_8080 proxyHttpAddress '0.0.0.0:{{ ueStackPort }}'"
+#    ignore_errors: yes
+#  - name: Change HttpStack hs_sp_50004 port
+#    shell: "source ~/.bash_profile;{{installDir}}/scripts/admin/systemAdmin.sh updateInstanceProperty hs_sp_50004 proxyHttpAddress '0.0.0.0:{{ spStackPort }}'"
+#    ignore_errors: yes
+
+#  - name: Change mmmc server agent ip
+#    shell: "source ~/.bash_profile;{{installDir}}/scripts/admin/systemAdmin.sh updateInstanceProperty mmmc_stack agent.connect.mmmc.ip.address '127.0.0.1'"
+#    ignore_errors: yes
+#  - name: Change mmmc server ip:port
+#    shell: "source ~/.bash_profile;{{installDir}}/scripts/admin/systemAdmin.sh updateModuleProperty MmmcStack 'mmmc.stack.interface.servers' '192.168.208.59:6888' "
+#    ignore_errors: yes
+#  - name: Change proxy es ip
+#    shell: "source ~/.bash_profile;{{installDir}}/scripts/admin/systemAdmin.sh updateModuleProperty 'MMS Relay' 'pxlet.0.chatbot.es.url' 'http://127.0.0.1:9200/' "
+#    ignore_errors: yes
+#  - name: Change proxy mysql ip1
+#    shell: "source ~/.bash_profile;{{installDir}}/scripts/admin/systemAdmin.sh updateModuleProperty 'MMS Relay' 'pxlet.0.mms.mm6.jdbc.driver' 'jdbc:mysql://127.0.0.1:3306/maap?useUnicode=true&characterEncoding=UTF-8;root;root;5;5;com.mysql.jdbc.Driver;5;10' "
+#    ignore_errors: yes
+#  - name: Change proxy mysql ip2
+#    shell: "source ~/.bash_profile;{{installDir}}/scripts/admin/systemAdmin.sh updateModuleProperty 'MMS Relay' 'pxlet.0.mms.mm6.jdbc.url' 'jdbc:mysql://127.0.0.1:3306/maap?useUnicode=true&characterEncoding=UTF-8;root;root;5;5;com.mysql.jdbc.Driver;5;10' "
+#    ignore_errors: yes
+#  - name: Change proxy mysql ip3
+#    shell: "source ~/.bash_profile;{{installDir}}/scripts/admin/systemAdmin.sh updateModuleProperty 'MMS Relay' 'pxlet.0.mms.basedata.store.enable' 'mysql' "
+#    ignore_errors: yes
+#  - name: Change proxy mysql ip4
+#    shell: "source ~/.bash_profile;{{installDir}}/scripts/admin/systemAdmin.sh updateModuleProperty 'MMS Relay' 'pxlet.0.mms.mms.ref.jdbc.url' 'jdbc:mysql://127.0.0.1:3306/maap?useUnicode=true&characterEncoding=UTF-8;root;root;5;5;com.mysql.jdbc.Driver;5;10' "
+#    ignore_errors: yes
+#  - name: Change proxy mysql ip5
+#    shell: "source ~/.bash_profile;{{installDir}}/scripts/admin/systemAdmin.sh updateModuleProperty 'Proxylet Configuration' 'pxlet.0.wapgw.mysql.jdbc.url' 'jdbc:mysql://127.0.0.1:3306/maap?useUnicode=true&characterEncoding=UTF-8' "
+#    ignore_errors: yes
+
+
+#  - name: get Ip of maap manage from shell
+#    shell: echo `hostname`|awk '{print substr($1,1,length($1)-1)"3"}'|xargs -I {} grep {} /etc/hosts|awk '{print $1}'
+#    register: manangeIp
+#  - name: get Ip of maap manage from shell
+#    debug: var=manangeIp.stdout  verbosity=0
+#  - name: Change complaint server ip to maap manage
+#    shell: "source ~/.bash_profile;{{installDir}}/scripts/admin/systemAdmin.sh updateModuleProperty 'MMS Relay' 'pxlet.0.chatbot.management.url' '{{ manangeIp.stdout }}:7988' "
+#    ignore_errors: yes
+
+######restart proxy
+ - name: stop_proxy
+   shell: source ~/.bash_profile;sh {{installDir}}/scripts/stop/stop_proxy
+
+ - name: get proxy pids from shell
+   shell: ps -ef|grep -E "/opt/proxy/bin/http_stack|/opt/java/jre/bin/java|/opt/java/bin/java"|grep -v grep |wc -l
+   register: proxyPids
+ - name: debug proxy pids
+   debug: var=proxyPids.stdout  verbosity=0
+   
+ - name: start_proxy
+   shell: source ~/.bash_profile;sh {{installDir}}/scripts/start/start_proxy
+
+# - name: stopDatabase.sh
+#   shell: source ~/.bash_profile;sh {{installDir}}/scripts/stop/stopDatabase.sh
+
+# - name: startDatabase.sh
+#   shell: source ~/.bash_profile;sh {{installDir}}/scripts/start/startDatabase.sh
+#
+#
+# - name: Change proxy name in opt
+#   shell: mv   {{installDir}} /opt/{{ stackName }} ; ln -s /opt/{{ stackName }}  {{installDir}}
+#   become: true
+#   become_user: root
+#   become_method: sudo
+#   ignore_errors: yes

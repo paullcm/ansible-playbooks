@@ -1,0 +1,27 @@
+---
+- name: Change maapdmp db ip in conf
+  lineinfile:
+    dest: "/opt/maapdmp/config/global.setting"
+    regexp: ^dburl
+    line:  dburl=127.0.0.1:3306
+    state: present
+
+- name: Change maap db slavedburl in conf
+  lineinfile:
+    dest: "/opt/maapdmp/config/global.setting"
+    regexp: ^slavedburl
+    line:  slavedburl=127.0.0.1:3306
+    state: present
+
+- name: Change maap db name in conf
+  lineinfile:
+    dest: "/opt/maapdmp/config/global.setting"
+    regexp: ^dbname
+    line:  dbname=maap_manage
+    state: present
+
+- name: stop maapdmp dmp
+  shell: source ~/.bash_profile;cd /opt/maapdmp/bin/; ./system_web_ctr stop
+
+- name: start maap dmp
+  shell: source ~/.bash_profile;cd /opt/maapdmp/bin/; ./system_web_ctr start

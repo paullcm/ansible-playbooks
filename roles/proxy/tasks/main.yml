@@ -1,0 +1,11 @@
+---
+    - name: cp file to proxy
+      include_tasks: proxyFile.yml
+
+    - name: Change proxy conf
+      include_tasks: proxy.yml
+      
+    # - name: Change maap conf
+    #   include_tasks: maap.yml
+    # - name: Change maap manage conf
+    #   include_tasks: maapManage.yml

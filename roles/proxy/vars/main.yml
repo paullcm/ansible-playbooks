@@ -1,0 +1,6 @@
+installDir: /opt/proxy
+stackName: dm
+rcsStackPort: 8000
+spStackPort: 8020
+ueStackPort: 8040
+
