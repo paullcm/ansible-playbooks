@@ -19,6 +19,17 @@
 #     src: "/opt/proxy/monconf/Properties.httpAgent"
 #     dest: /opt/proxy/monconf
 
+
+# - name: copy httpstack  to bin
+#   copy:
+#     src: "/disk/workspace/ASBPF8270_static/HttpStack/bin/http_stack.debug"
+#     dest: /opt/proxy/bin/http_stack
+
+- name: copy mmscommon jar to custo
+  copy:
+    src: "/disk/workspace/ASBPF8571/MMSCommon/lib/mmscommon.jar"
+    dest: /opt/proxy/custo
+
 - name: copy mmspxapi jar to custo
   copy:
     src: "/disk/workspace/ASBPF8571/MMSProxyletAPI/lib/mmspxapi.jar"
@@ -54,10 +65,14 @@
     src: "/disk/workspace/ASBPF8571/CTMMSCDE/lib/ctmmscde.jar"
     dest: /opt/proxy/custo
 
-
-- name: copy HttpAgent jar to custo
+- name: copy httpagent jar to custo
   copy:
     src: "/disk/workspace/ASBPF8571/HttpAgent/lib/httpagent.jar"
+    dest: /opt/proxy/custo
+
+- name: copy gwutils jar to custo
+  copy:
+    src: "/disk/workspace/ASBPF8571/GatewaysUtils/lib/gwutils.jar"
     dest: /opt/proxy/custo
 
 # - name: copy ntp rpm

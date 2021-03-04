@@ -1,0 +1,5 @@
+- hosts: clickhouse
+  gather_facts: yes
+  become: yes
+  roles: 
+      - role: clickhouse

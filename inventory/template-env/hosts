@@ -47,7 +47,11 @@ mapp-22-emulate-3 hostname=mapp-22-emulate-3  ansible_host=192.168.209.135 ansib
 mapp-22-emulate-2 hostname=mapp-22-emulate-2  ansible_host=192.168.209.145 ansible_port=22 ansible_user=root ansible_ssh_pass=nextenso
 mapp-22-emulate-1 hostname=mapp-22-emulate-1  ansible_host=192.168.209.122 ansible_port=22 ansible_user=root ansible_ssh_pass=nextenso
 
-
+[clickhouse]
+maap-mongo-dev-01 hostname=maap-mongo-dev-01  ansible_host=192.168.208.121 ansible_port=22 ansible_user=root ansible_ssh_pass=nextenso
+maap-mongo-dev-04 hostname=maap-mongo-dev-04  ansible_host=192.168.208.124 ansible_port=22 ansible_user=root ansible_ssh_pass=nextenso
+maap-mongo-dev-05 hostname=maap-mongo-dev-05  ansible_host=192.168.208.125 ansible_port=22 ansible_user=root ansible_ssh_pass=nextenso
+maap-mongo-dev-06 hostname=maap-mongo-dev-06  ansible_host=192.168.208.126 ansible_port=22 ansible_user=root ansible_ssh_pass=nextenso
 
 [test]
 node1 ansible_ssh_host=192.168.208.163 hostname=node1
