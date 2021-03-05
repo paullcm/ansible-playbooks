@@ -1,0 +1,4 @@
+clickhouse_macros:
+  layer: 01
+  shard: "your_shard_name"
+  replica: "maap-mongo-dev-05"

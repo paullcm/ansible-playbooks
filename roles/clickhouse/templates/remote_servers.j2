@@ -10,6 +10,8 @@
         <replica>
           <host>{{ replica['host'] }}</host>
           <port>{{ replica['port'] | default(9000) }}</port>
+           <user>testuser3</user>
+           <password>testplpassword</password>
         </replica>
 {% endfor %}
       </shard>
